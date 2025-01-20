@@ -5,11 +5,11 @@ Python wrapper library for the Shodan Monitor API
 ## Description
 This product enables monitoring and alerting capabilities on public-facing endpoints via Shodan Monitor. The goal of this library is to enable real-time updates on potential vulnerabilities and misconfigurations affecting your publicly-facing networking products.
 
-By instantly getting actionable alerts about security misconfigurations, vulnerable services, open databases, and more to network owners and administrators, we reduce the time to remediation on vulnerabilities affecting the devices which make up our attack surface.
+By instantly getting actionable alerts about security misconfigurations, vulnerable services, open databases, and more to network owners/admins, you will reduce the TTR on vulnerabilities affecting the devices on your network perimeter.
 
 ### shodan-monitor.py
 wrapper library for simple interaction with the Shodan API to create and update monitoring groups in Shodan Monitor.
-Cloud resources and public-facing internal network devices (firewalls etc) can be identified and grouped via Sentinel/Opensearch queries, and then loaded into Shodan Monitor to enable alerting on a number of misconfigurations malware, vulnerable services and more as described in the linked documentation. These alerts can then be sent to the resource owners Scorecard product for remediation.
+Cloud resources and public-facing internal network devices (firewalls etc) can be identified and grouped via SIEM queries, and then loaded into Shodan Monitor to enable alerting on a number of misconfigurations malware, vulnerable services and more as described in the documentation.
 
 #### Real-time monitoring
 Shodan Monitor offers users real-time monitoring capabilities with customizable alerts. 
