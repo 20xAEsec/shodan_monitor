@@ -46,14 +46,15 @@ The script performs the following tasks:
 
 2. **Retrieve Public IP:**  
    Calls an external service (ipify) to obtain the public IP address of your network. This IP represents the outward-facing gateway of your internal network.
+      - Additionally, if `all_public_devices=True`, an ```nmap``` scan is performed to search for devices with public IP addresses on your network to be onboarded.
 
-3. **Manage Shodan Monitor Group:**  
+4. **Manage Shodan Monitor Group:**  
    - **Find Group:** Attempts to find an existing Shodan Monitor group by name.
    - **Create Group:** If no matching group is found, a new group is created.
    - **Onboard IP:** The retrieved public IP is then onboarded into the group.
    - **Configure Alerts:** Built-in alert triggers are configured for the group to monitor for specific events.
 
-4. **Example Usage:**  
+5. **Example Usage:**  
    When executed as the main script, it will run the onboarding process with the group name "Home Network".
 
 ### Alerts
