@@ -1,10 +1,8 @@
-import boto3
 import json 
 import requests 
 import time 
 import urllib.parse
 
-import credentials # API Key stored here (if storing locally)
 
 # Creates new Network Monitoring group in Shodan Monitor 
 # with initial IP address of 8.8.8.8 (Google DNS) - 1 IP required for group creation
@@ -93,16 +91,37 @@ def find_group_by_name(api_key, group_name):
     # True if addition is successful
     # False if not
 def add_ips_to_shodan_group(api_key, group_id, ip_list):
-    url = f'https://api.shodan. io/shodan/alert/{group_id}?key={api_key}'
-    payload = {'ips': ip_list}
+    url = f'https://api.shodan.io/shodan/alert/{group_id}?key={api_key}'
+    payload = { 'filters': {
+                'ip': ip_list}
+            }
+    
     time.sleep(1)
-    response = requests.post(url, data=payload)
+    response = requests.post(url, json=payload)
     # Return True if successful; otherwise False
     if response.status_code == 200:
         print("ips added to shodan group")
         return True
     else:
-        print("error adding ips to shodan group")
+        print(f"error adding ips to shodan group - {response.status_code}")
+        return False
+    
+def add_ip_to_shodan_group(api_key, group_id, ip_addr):
+    ip_payload = []
+    ip_payload.append(ip_addr)
+    url = f'https://api.shodan.io/shodan/alert/{group_id}?key={api_key}'
+    payload = { 'filters': {
+                'ip': ip_payload
+                }
+            }
+    time.sleep(1)
+    response = requests.post(url, json=payload)
+    # Return True if successful; otherwise False
+    if response.status_code == 200:
+        print("ips added to shodan group")
+        return True
+    else:
+        print(f"error adding ips to shodan group - {response.status_code}")
         return False
 
 
@@ -256,6 +275,8 @@ def add_alerts_to_group(api_key, group_id):
         return True
     else:
         return False
-    
-group_id = create_ip_group(credentials.API_KEY, "test_group")
-add_alerts_to_group(credentials.API_KEY, group_id)
+
+# if __name__ == "__main__":
+#     api_key = os.getenv("SHODAN_API_KEY")
+#     group_id = create_ip_group(api_key, "test_group")
+#     add_alerts_to_group(api_key, group_id)
