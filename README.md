@@ -32,20 +32,7 @@ Users can create their customized criteria to enable the Shodan Monitor to focus
 Monitor provides a history of device activity, with data kept up to 14 months based on the selected subscription. The historical data allows for verification of new anomalies in broader contexts, making it possible to track long-term developments.
 #### API Integrations
 Monitor provides APls for integrating with other security management tools to feed systems with intelligence using real-time monitoring and event triggers.
-### Alerts
-| Alert Name              | Description                                                                                                                                                      |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| end_of_life            | Triggered when Shodan Monitor detects devices or software that are no longer supported by the vendor, posing a significant security risk as the device may no longer receive critical patches or firmware updates. |
-| industrial_control_system | Triggered when Shodan Monitor detects devices or software that control and monitor industrial processes, such as manufacturing lines, which attackers can potentially exploit to gain unauthorized access or disrupt physical processes. |
-| internet_scanner       | Triggered when Shodan Monitor detects network reconnaissance activities, such as scanning for open ports, that are often precursors to more targeted attacks.      |
-| iot                   | Triggered when Shodan Monitor detects the presence of Internet of Things (IoT) devices, such as smart home devices, which attackers can potentially exploit to gain access to or disrupt your network. |
-| malware               | Triggered when Shodan Monitor detects malware activity on a device, domain or service.                                                                           |
-| new_service           | Triggered when Shodan Monitor detects a new service being offered, such as a new webserver, database, or email, that was not previously available to the internet. |
-| open_database         | Triggered when Shodan Monitor detects an open database that is not protected by a password or firewall.                                                          |
-| ssl_expired           | Triggered when Shodan Monitor detects SSL or TLS certificates that have expired or are soon to expire, which can lead to security vulnerabilities in your web-based applications and services. |
-| uncommon              | Triggered when Shodan Monitor detects a device or system with an unusual configuration or usage pattern.                                                         |
-| uncommon_plus         | Similar to the uncommon alert, however, uncommon_plus is triggered when Shodan Monitor detects a device or system with an even more unusual configuration.        |
-| vulnerable            | Triggered when Shodan Monitor detects a device, system, or service with known vulnerabilities that can be exploited by attackers to gain unauthorized access or cause disruption to the network or system. |
+
 # Home Network Onboarding to Shodan Monitor
 
 This Python script automates the process of onboarding your home network's public IP address into a Shodan Monitor group. It retrieves your network's public IP, creates or locates an existing Shodan Monitor group, adds your IP to that group, and configures built-in alert triggers—all while leveraging environment variables for secure API key management.
@@ -68,6 +55,22 @@ The script performs the following tasks:
 
 4. **Example Usage:**  
    When executed as the main script, it will run the onboarding process with the group name "Home Network".
+
+### Alerts
+| Alert Name              | Description                                                                                                                                                      |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| end_of_life            | Triggered when Shodan Monitor detects devices or software that are no longer supported by the vendor, posing a significant security risk as the device may no longer receive critical patches or firmware updates. |
+| industrial_control_system | Triggered when Shodan Monitor detects devices or software that control and monitor industrial processes, such as manufacturing lines, which attackers can potentially exploit to gain unauthorized access or disrupt physical processes. |
+| internet_scanner       | Triggered when Shodan Monitor detects network reconnaissance activities, such as scanning for open ports, that are often precursors to more targeted attacks.      |
+| iot                   | Triggered when Shodan Monitor detects the presence of Internet of Things (IoT) devices, such as smart home devices, which attackers can potentially exploit to gain access to or disrupt your network. |
+| malware               | Triggered when Shodan Monitor detects malware activity on a device, domain or service.                                                                           |
+| new_service           | Triggered when Shodan Monitor detects a new service being offered, such as a new webserver, database, or email, that was not previously available to the internet. |
+| open_database         | Triggered when Shodan Monitor detects an open database that is not protected by a password or firewall.                                                          |
+| ssl_expired           | Triggered when Shodan Monitor detects SSL or TLS certificates that have expired or are soon to expire, which can lead to security vulnerabilities in your web-based applications and services. |
+| uncommon              | Triggered when Shodan Monitor detects a device or system with an unusual configuration or usage pattern.                                                         |
+| uncommon_plus         | Similar to the uncommon alert, however, uncommon_plus is triggered when Shodan Monitor detects a device or system with an even more unusual configuration.        |
+| vulnerable            | Triggered when Shodan Monitor detects a device, system, or service with known vulnerabilities that can be exploited by attackers to gain unauthorized access or cause disruption to the network or system. |
+
 
 ## Requirements
 
