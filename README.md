@@ -7,6 +7,14 @@ This product enables monitoring and alerting capabilities on public-facing endpo
 
 By instantly getting actionable alerts about security misconfigurations, vulnerable services, open databases, and more to network owners/admins, you will reduce the TTR on vulnerabilities affecting the devices on your network perimeter.
 
+
+### Installation
+
+To install all the required dependencies, run the following command in your terminal:
+
+```bash
+pip install -r requirements.txt
+```
 ### shodan-monitor.py
 wrapper library for simple interaction with the Shodan API to create and update monitoring groups in Shodan Monitor.
 Cloud resources and public-facing internal network devices (firewalls etc) can be identified and grouped via SIEM queries, and then loaded into Shodan Monitor to enable alerting on a number of misconfigurations malware, vulnerable services and more as described in the documentation.
@@ -35,3 +43,50 @@ Monitor provides APls for integrating with other security management tools to fe
 | uncommon              | Triggered when Shodan Monitor detects a device or system with an unusual configuration or usage pattern.                                                         |
 | uncommon_plus         | Similar to the uncommon alert, however, uncommon_plus is triggered when Shodan Monitor detects a device or system with an even more unusual configuration.        |
 | vulnerable            | Triggered when Shodan Monitor detects a device, system, or service with known vulnerabilities that can be exploited by attackers to gain unauthorized access or cause disruption to the network or system. |
+# Home Network Onboarding to Shodan Monitor
+
+This Python script automates the process of onboarding your home network's public IP address into a Shodan Monitor group. It retrieves your network's public IP, creates or locates an existing Shodan Monitor group, adds your IP to that group, and configures built-in alert triggers—all while leveraging environment variables for secure API key management.
+
+## Overview
+
+The script performs the following tasks:
+
+1. **Load Environment Variables:**  
+   Uses the `python-dotenv` package to load environment variables from a `.env` file. Make sure your `.env` file contains your Shodan API key (e.g., `SHODAN_API_KEY=your_api_key`).
+
+2. **Retrieve Public IP:**  
+   Calls an external service (ipify) to obtain the public IP address of your network. This IP represents the outward-facing gateway of your internal network.
+
+3. **Manage Shodan Monitor Group:**  
+   - **Find Group:** Attempts to find an existing Shodan Monitor group by name.
+   - **Create Group:** If no matching group is found, a new group is created.
+   - **Onboard IP:** The retrieved public IP is then onboarded into the group.
+   - **Configure Alerts:** Built-in alert triggers are configured for the group to monitor for specific events.
+
+4. **Example Usage:**  
+   When executed as the main script, it will run the onboarding process with the group name "Home Network".
+
+## Requirements
+
+This project relies on the following Python packages, each pinned to a specific version to ensure compatibility and stability. Make sure to install these dependencies exactly as specified:
+
+- **certifi (2025.1.31):**  
+  Provides Mozilla's CA Bundle, ensuring that SSL certificates used in HTTPS connections are validated properly for secure communication.
+
+- **charset-normalizer (3.4.1):**  
+  A tool for detecting and normalizing character encodings. It ensures that text data is correctly interpreted across various formats.
+
+- **idna (3.10):**  
+  Implements support for Internationalized Domain Names (IDN), enabling the correct handling of non-ASCII domain names.
+
+- **python-dotenv (1.0.1):**  
+  Loads environment variables from a `.env` file into your application's environment. This helps manage configuration and sensitive information (e.g., API keys) securely.
+
+- **python-nmap (0.7.1):**  
+  A Python wrapper for the Nmap tool, allowing you to perform network scans and discover devices on your network programmatically.
+
+- **requests (2.32.3):**  
+  A user-friendly HTTP library for Python, used to make API calls and interact with web services easily.
+
+- **urllib3 (2.3.0):**  
+  A powerful, low-level HTTP client library that underpins the Requests library. It handles the core aspects of HTTP communication and connection pooling.
