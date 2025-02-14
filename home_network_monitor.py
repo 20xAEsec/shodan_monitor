@@ -1,5 +1,8 @@
 import os
 import requests
+
+from get_public_ips import scan_network_range
+
 from dotenv import load_dotenv # Load environment variables from .env file
 load_dotenv()
 
@@ -11,7 +14,7 @@ from shodan_monitor import (
     add_alerts_to_group,
 )
 
-def get_public_ip():
+def get_gateway_ip():
     """
     Retrieves the public IP address of the current network by querying an external service.
     Returns the IP address as a string, or None if the request fails.
@@ -27,7 +30,7 @@ def get_public_ip():
 
 
 
-def onboard_home_network_to_shodan(group_name="home_network"):
+def onboard_home_network_to_shodan(group_name="home_network", all_public_devices=False):
     """
     Scans the specified home network range using nmap, identifies live hosts,
     and onboards these IP addresses into a Shodan Monitor group. If the group 
@@ -37,11 +40,29 @@ def onboard_home_network_to_shodan(group_name="home_network"):
         group_name (str): Desired name for the Shodan Monitor group.
         network_range (str): CIDR notation for the network range to scan.
     """
-    gateway_ip = get_public_ip()
+
+    onboard_ips = []
+    gateway_ip = get_gateway_ip()
     if not gateway_ip:
         print("Failed to retrieve public IP address.")
         return
+    else:
+        onboard_ips.append(gateway_ip)
 
+    if all_public_devices:
+        from get_public_ips import scan_network_range # lazy import 
+        start_range = input("Enter the starting subnet number (192.168.x.0/24) : ")
+        end_range = input("Enter the ending subnet number (192.168.y.0/24) : ")
+        print(f"Scanning network range 192.168.{start_range}.0/24 to 192.168.{end_range}.0/24 ...")
+        public_hosts = scan_network_range(filter_public=True, range_start=int(start_range), range_end=int(end_range))
+        if public_hosts:
+            print("\nActive public devices found:")
+            for ip in public_hosts:
+                print(f" - {ip}")
+        else:
+            print("\nNo active public devices detected in the scanned range.")
+        onboard_ips.append(public_hosts)
+    
     
     # Use the stored API key from your credentials module
     api_key = os.getenv("SHODAN_API_KEY")
@@ -58,7 +79,7 @@ def onboard_home_network_to_shodan(group_name="home_network"):
         print(f"Using existing group '{group_name}' with ID: {group_id}")
     
     # Onboard the live IP addresses to the Shodan Monitor group
-    if add_ip_to_shodan_group(api_key, group_id, gateway_ip):
+    if add_ip_to_shodan_group(api_key, group_id, onboard_ips):
         print("Successfully onboarded IPs to Shodan Monitor.")
     else:
         print("Error: Failed to onboard IPs to Shodan Monitor.")
@@ -72,4 +93,8 @@ def onboard_home_network_to_shodan(group_name="home_network"):
 
 # Example usage:
 if __name__ == "__main__":
-    onboard_home_network_to_shodan(group_name="Home Network")
+    onboard_home_network_to_shodan(group_name="Home Network", all_public_devices=True) # set to False to skip network scan and onboard gateway/router IP address
+
+   
+
+
