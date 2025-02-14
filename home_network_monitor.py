@@ -10,7 +10,7 @@ load_dotenv()
 from shodan_monitor import (
     create_ip_group,
     find_group_by_name,
-    add_ip_to_shodan_group,
+    add_ips_to_shodan_group,
     add_alerts_to_group,
 )
 
@@ -59,9 +59,16 @@ def onboard_home_network_to_shodan(group_name="home_network", all_public_devices
             print("\nActive public devices found:")
             for ip in public_hosts:
                 print(f" - {ip}")
+
+            if len(public_hosts) > 0:
+                for ip in public_hosts:
+                    onboard_ips.append(ip)
+                
+
         else:
             print("\nNo active public devices detected in the scanned range.")
-        onboard_ips.append(public_hosts)
+        
+        
     
     
     # Use the stored API key from your credentials module
@@ -79,7 +86,7 @@ def onboard_home_network_to_shodan(group_name="home_network", all_public_devices
         print(f"Using existing group '{group_name}' with ID: {group_id}")
     
     # Onboard the live IP addresses to the Shodan Monitor group
-    if add_ip_to_shodan_group(api_key, group_id, onboard_ips):
+    if add_ips_to_shodan_group(api_key, group_id, onboard_ips):
         print("Successfully onboarded IPs to Shodan Monitor.")
     else:
         print("Error: Failed to onboard IPs to Shodan Monitor.")
