@@ -10,7 +10,7 @@ By instantly getting actionable alerts about security misconfigurations, vulnera
 
 ### Installation
 
-To install all the required dependencies, clone the repository, install dependencies, and run the following command in your terminal:
+To install all the required dependencies, clone the repository, install the dependencies, and execute ```home_network_monitor.py```
 
 ```bash
 git clone https://github.com/20xAEsec/shodan_monitor.git
