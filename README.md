@@ -16,8 +16,12 @@ To install all the required dependencies, clone the repository, install the depe
 git clone https://github.com/20xAEsec/shodan_monitor.git
 cd shodan_monitor
 pip install -r requirements.txt
+```
+To onboard your home network using the script, execute the following command:
+```bash
 python3 home_network_monitor.py
 ```
+
 ### shodan-monitor.py
 wrapper library for simple interaction with the Shodan API to create and update monitoring groups in Shodan Monitor.
 Cloud resources and public-facing internal network devices (firewalls etc) can be identified and grouped via SIEM queries, and then loaded into Shodan Monitor to enable alerting on a number of misconfigurations malware, vulnerable services and more as described in the documentation.
