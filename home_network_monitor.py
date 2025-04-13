@@ -68,9 +68,6 @@ def onboard_home_network_to_shodan(group_name="home_network", all_public_devices
         else:
             print("\nNo active public devices detected in the scanned range.")
         
-        
-    
-    
     # Use the stored API key from your credentials module
     api_key = os.getenv("SHODAN_API_KEY")
 
