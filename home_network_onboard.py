@@ -1,7 +1,7 @@
 import os
 import requests
 
-from get_public_ips import scan_network_range
+from nmap_get_public_ips import scan_network_range
 
 from dotenv import load_dotenv # Load environment variables from .env file
 load_dotenv()
@@ -51,7 +51,6 @@ def onboard_home_network_to_shodan(group_name="home_network", all_public_devices
         onboard_ips.append(gateway_ip)
 
     if all_public_devices:
-        from get_public_ips import scan_network_range # lazy import 
         start_range = input("Enter the starting subnet number (192.168.x.0/24) : ")
         end_range = input("Enter the ending subnet number (192.168.y.0/24) : ")
         print(f"Scanning network range 192.168.{start_range}.0/24 to 192.168.{end_range}.0/24 ...")
