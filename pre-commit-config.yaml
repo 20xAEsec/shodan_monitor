@@ -1,0 +1,8 @@
+# .pre-commit-config.yaml
+# Scans changes commited to branch for secrets
+# blocks secrets from being commited and possibly pushed to repo
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.2  # Replace with latest stable release
+    hooks:
+      - id: gitleaks
