@@ -4,6 +4,44 @@ import time
 import urllib.parse
 
 
+import boto3
+import json
+import logging
+from botocore.exceptions import ClientError
+
+def get_secret_aws(secret_name="shodan_secret", region_name="us-west-2"):
+    """
+    Retrieve the Shodan API key stored in AWS Secrets Manager.
+
+    :param secret_name: Name of the secret in AWS Secrets Manager.
+    :param region_name: AWS region where the secret is stored.
+    :return: Shodan API key as a string.
+    """
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(SecretId=secret_name)
+    except ClientError as e:
+        logging.error(f"Unable to retrieve secret {secret_name}: {e}")
+        raise e
+    else:
+        # Secrets Manager decrypts the secret value using the associated KMS key
+        if 'SecretString' in get_secret_value_response:
+            secret = get_secret_value_response['api_key']
+            try:
+                secret_dict = json.loads(secret)
+                return secret_dict.get("api_key", secret)
+            except json.JSONDecodeError:
+                return secret
+        else:
+            # If the secret is binary, decode it
+            return get_secret_value_response['SecretBinary'].decode('utf-8')
+
 # Creates new Network Monitoring group in Shodan Monitor 
 # with initial IP address of 8.8.8.8 (Google DNS) - 1 IP required for group creation
 # Input: 
@@ -277,6 +315,10 @@ def add_alerts_to_group(api_key, group_id):
         return False
 
 # if __name__ == "__main__":
-#     api_key = os.getenv("SHODAN_API_KEY")
+#     if aws_secret:
+#        api_key = get_secret_aws()        
+#     else:
+#        api_key = os.getenv("SHODAN_API_KEY")
+#     
 #     group_id = create_ip_group(api_key, "test_group")
 #     add_alerts_to_group(api_key, group_id)
