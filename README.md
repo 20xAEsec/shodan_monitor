@@ -10,6 +10,7 @@ By instantly getting actionable alerts about security misconfigurations, vulnera
 
 ### Installation
 
+#### GitLeaks pre-commit hook
 To install the gitleaks pre-commit hook and prevent your secret from being pushed,  
 install the pre-commit hook by running these commands at the repo root.  
 This will run GitLeaks against every commit, and block your commit if your changes contain hard-coded credentials.
@@ -18,6 +19,15 @@ This will run GitLeaks against every commit, and block your commit if your chang
 pip install pre-commit
 pre-commit install
 ```
+
+If you try to commit a hard-coded secret, you will be blocked with the following message.  
+
+```bash
+[WARNING] Gitleaks detected hardcoded secrets. Commit aborted.
+```  
+Be sure to use proper secrets management to commit to this project.
+
+#### Shodan Monitor Installation
 
 To install all the required dependencies, clone the repository, install the dependencies, and execute ```home_network_monitor.py```
 
