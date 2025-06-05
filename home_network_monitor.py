@@ -16,7 +16,7 @@ from shodan_monitor import (
 
 def get_gateway_ip():
     """
-    Retrieves the public IP address of the current network by querying an external service.
+    Retrieves your network's public IP using the api.ipify.org REST API.
     Returns the IP address as a string, or None if the request fails.
     """
     try:
@@ -38,7 +38,7 @@ def onboard_home_network_to_shodan(group_name="home_network", all_public_devices
     
     Parameters:
         group_name (str): Desired name for the Shodan Monitor group.
-        network_range (str): CIDR notation for the network range to scan.
+        all_public_devices (bool): If True, scans for additional public-facing IPs within a given internal subnet range.
     """
 
     onboard_ips = []
@@ -97,7 +97,7 @@ def onboard_home_network_to_shodan(group_name="home_network", all_public_devices
 
 # Example usage:
 if __name__ == "__main__":
-    onboard_home_network_to_shodan(group_name="Home Network", all_public_devices=True) # set to False to skip network scan and onboard gateway/router IP address
+    onboard_home_network_to_shodan(group_name="Home Network", all_public_devices=True) # set to False to skip network scan and only onboard gateway/router IP address
 
    
 
