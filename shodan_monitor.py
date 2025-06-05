@@ -315,10 +315,12 @@ def add_alerts_to_group(api_key, group_id):
         return False
 
 # if __name__ == "__main__":
+#     use below if needed 
 #     if aws_secret:
-#        api_key = get_secret_aws()        
-#     else:
-#        api_key = os.getenv("SHODAN_API_KEY")
+#         api_key = get_secret_aws()        
+#   
+#     
+#     api_key = os.getenv("SHODAN_API_KEY")
 #     
 #     group_id = create_ip_group(api_key, "test_group")
 #     add_alerts_to_group(api_key, group_id)
