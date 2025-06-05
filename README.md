@@ -10,6 +10,14 @@ By instantly getting actionable alerts about security misconfigurations, vulnera
 
 ### Installation
 
+To install the gitleaks pre-commit hook and prevent your secret from being pushed,  
+install the pre-commit hook by running these commands at the repo root.
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
 To install all the required dependencies, clone the repository, install the dependencies, and execute ```home_network_monitor.py```
 
 ```bash
