@@ -65,7 +65,7 @@ def create_ip_group(api_key, group_name) :
     
     # If successful, get and return the Group ID, otherwise return None
     if response.status_code == 200:
-        print ("IP group created - " + response.text)
+        print (f"IP group created - HTTP {response.status_code}")
         return response. json()['id']
     else:
         return None
@@ -81,7 +81,7 @@ def delete_ip_group(api_key, group_id):
     url = f'https://api.shodan.io/shodan/alert/{group_id}?key={api_key}'
     time.sleep(1)
     response = requests.post(url)
-    print("group deletion status code" + str(response.status_code) )
+    print(f"group deletion status code HTTP {response.status_code}")
     
     # If successful, get and return the Group ID, otherwise return None
     if response.status_code == 200:
@@ -100,7 +100,7 @@ def find_group_by_name(api_key, group_name):
     url = f'https://api.shodan.io/shodan/alert/info?key={api_key}'
     time.sleep(1)
     response = requests.get(url)
-    print ("find_group_by_name status code - " + str(response.status_code) )
+    print (f"find_group_by_name status code - HTTP {response.status_code}" )
     if response.status_code == 200:     # if the API request was successful
         try:
             network_alerts = response.json() # Parse the JSON response
@@ -208,7 +208,7 @@ def update_shodan_group_ips(api_key, group_id, update_list):
             print ("SUCCESS - Shodan Monitor alert group updated" ) 
             return True
         else:
-            print(str(response.status_code) + " - ERROR updating Shodan Monitor alert group")
+            print(f"{response.status_code} - ERROR updating Shodan Monitor alert group")
             print(payload)
             return False
 
