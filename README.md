@@ -12,6 +12,7 @@ By instantly getting actionable alerts about security misconfigurations, vulnera
 
 To install the gitleaks pre-commit hook and prevent your secret from being pushed,  
 install the pre-commit hook by running these commands at the repo root.
+This will run GitLeaks against every commit, and block your commit if your changes contain hard-coded credentials.
 
 ```bash
 pip install pre-commit
