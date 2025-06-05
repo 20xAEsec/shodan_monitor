@@ -39,6 +39,7 @@ def onboard_home_network_to_shodan(group_name="home_network", all_public_devices
     Parameters:
         group_name (str): Desired name for the Shodan Monitor group.
         all_public_devices (bool): If True, scans for additional public-facing IPs within a given internal subnet range.
+                                   If False, skips internal nmap scan and proceeds to onboard gateway/router IP
     """
 
     onboard_ips = []
