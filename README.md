@@ -98,25 +98,27 @@ The script performs the following tasks:
 
 ## Requirements
 
-This project relies on the following Python packages, each pinned to a specific version to ensure compatibility and stability. Make sure to install these dependencies exactly as specified:
+This project relies on the following Python packages, each pinned to a specifi c version to ensure compatibility and stability. Make sure to install these dependencies exactly as specified:
 
-- **certifi (2025.1.31):**  
-  Provides Mozilla's CA Bundle, ensuring that SSL certificates used in HTTPS connections are validated properly for secure communication.
-
-- **charset-normalizer (3.4.1):**  
-  A tool for detecting and normalizing character encodings. It ensures that text data is correctly interpreted across various formats.
-
-- **idna (3.10):**  
-  Implements support for Internationalized Domain Names (IDN), enabling the correct handling of non-ASCII domain names.
-
-- **python-dotenv (1.0.1):**  
-  Loads environment variables from a `.env` file into your application's environment. This helps manage configuration and sensitive information (e.g., API keys) securely.
-
-- **python-nmap (0.7.1):**  
-  A Python wrapper for the Nmap tool, allowing you to perform network scans and discover devices on your network programmatically.
-
-- **requests (2.32.3):**  
-  A user-friendly HTTP library for Python, used to make API calls and interact with web services easily.
-
-- **urllib3 (2.3.0):**  
-  A powerful, low-level HTTP client library that underpins the Requests library. It handles the core aspects of HTTP communication and connection pooling.
+- **boto3 (1.38.30)**: AWS SDK for Python to interact with AWS services.
+- **botocore (1.38.30)**: Core functionality used by boto3 for making AWS API calls.
+- **certifi (2025.1.31)**: Provides SSL certificates for secure HTTP requests.
+- **cfgv (3.4.0)**: Validates configuration and settings files.
+- **charset-normalizer (3.4.1)**: Detects and normalizes text encoding for HTTP responses.
+- **distlib (0.3.9)**: Supports packaging and distribution of Python software.
+- **filelock (3.18.0)**: Offers file locking to prevent concurrent access issues.
+- **identify (2.6.12)**: Detects file types and properties, commonly used by git hooks.
+- **idna (3.10)**: Handles internationalized domain names in URLs.
+- **jmespath (1.0.1)**: Queries JSON data structures efficiently.
+- **nodeenv (1.9.1)**: Manages isolated Node.js environments.
+- **platformdirs (4.3.8)**: Provides standardized paths for application data.
+- **pre_commit (4.2.0)**: Framework to manage and execute git pre-commit hooks.
+- **python-dateutil (2.9.0.post0)**: Utilities for parsing and manipulating dates and times.
+- **python-dotenv (1.0.1)**: Loads environment variables from `.env` files.
+- **python-nmap (0.7.1)**: Enables network scanning and host discovery with nmap.
+- **PyYAML (6.0.2)**: Parses and serializes YAML files.
+- **requests (2.32.3)**: Simplifies HTTP requests to APIs and web services.
+- **s3transfer (0.13.0)**: Provides managed transfers of files to and from AWS S3.
+- **six (1.17.0)**: Ensures compatibility between Python 2 and Python 3.
+- **urllib3 (2.3.0)**: Performs robust HTTP client operations and connection pooling.
+- **virtualenv (20.31.2)**: Creates isolated Python environments.
