@@ -178,7 +178,7 @@ def update_shodan_group_ips(api_key, group_id, update_list):
     #print (group_url)
     # Check if the API request was successful
     if response.status_code == 200:
-        ip_list = response. json()["'filters"]["ip"]  # Parse the JSON response; gets IP's in Group
+        ip_list = response. json()["filters"]["ip"]  # Parse the JSON response; gets IP's in Group
 
         update_set = set(update_list) # convert to sets for efficient comparisons
         shodan_ip_set = set(ip_list)
